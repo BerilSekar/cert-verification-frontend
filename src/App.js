@@ -32,6 +32,7 @@ function App() {
   const [showHistory, setShowHistory] = useState(false);
   const [registrationMessage, setRegistrationMessage] = useState("");
   const [showInstitutionRequest, setShowInstitutionRequest] = useState(false);
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
   useEffect(() => {
     document.body.style.backgroundImage = darkMode
@@ -58,7 +59,7 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://127.0.0.1:5000/verify", {
+    const res = await fetch(`${backendUrl}/verify`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -73,7 +74,7 @@ function App() {
 
   const handleAskQuestion = async () => {
     try {
-      const res = await fetch("http://127.0.0.1:5000/ask-ai", {
+      const res = await fetch(`${backendUrl}/ask-ai`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
